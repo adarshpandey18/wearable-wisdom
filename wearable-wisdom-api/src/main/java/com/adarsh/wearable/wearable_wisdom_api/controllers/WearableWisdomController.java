@@ -35,6 +35,4 @@ public class WearableWisdomController {
         QuoteDTO quoteDTO = wearableWisdomService.getDailyQuote();
         return ResponseEntity.ok(quoteDTO);
     }
-
-
 }
