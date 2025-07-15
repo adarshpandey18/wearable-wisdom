@@ -27,7 +27,7 @@ class _QuoteScreenState extends State<QuoteScreen> {
     final loading = provider.loading;
 
     return GestureDetector(
-      onTap: () => provider.getDailyQuote(),
+      onTap: () => provider.getRandomQuote(),
       child: Scaffold(
         backgroundColor: Colors.black,
         body: Center(
