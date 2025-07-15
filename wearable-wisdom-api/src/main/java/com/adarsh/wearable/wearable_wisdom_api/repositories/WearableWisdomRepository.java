@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 
 public interface WearableWisdomRepository extends JpaRepository<Quote, Long> {
-    @Query("SELECT q FROM Quote q ORDER BY function('RANDOM')")
+    @Query(value = "SELECT * FROM quote ORDER BY RANDOM() LIMIT 1", nativeQuery = true)
     Quote getRandomQuote();
 
     Optional<Quote> findByIsDailyTrue();

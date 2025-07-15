@@ -20,6 +20,7 @@ public class WearableWisdomService {
 
     public QuoteDTO saveQuote(QuoteDTO quoteDTO) {
         Quote quote = modelMapper.map(quoteDTO, Quote.class);
+        quote.setDaily(false);
        Quote saved =  wearableWisdomRepository.save(quote);
        return modelMapper.map(saved, QuoteDTO.class);
     }
