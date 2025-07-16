@@ -1,11 +1,16 @@
 package com.adarsh.wearable.wearable_wisdom_api.controllers;
 
+import com.adarsh.wearable.wearable_wisdom_api.dtos.AllQuoteDTO;
 import com.adarsh.wearable.wearable_wisdom_api.dtos.QuoteDTO;
+import com.adarsh.wearable.wearable_wisdom_api.entities.Quote;
 import com.adarsh.wearable.wearable_wisdom_api.services.WearableWisdomService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -34,5 +39,15 @@ public class WearableWisdomController {
     public ResponseEntity<QuoteDTO> getDailyQuote() {
         QuoteDTO quoteDTO = wearableWisdomService.getDailyQuote();
         return ResponseEntity.ok(quoteDTO);
+    }
+
+    @GetMapping("/allQuotes")
+    public ResponseEntity<AllQuoteDTO> getAllQuotes() {
+        List<QuoteDTO> quoteDTOList = wearableWisdomService.getAllQuotes();
+        AllQuoteDTO allQuoteDTO = new AllQuoteDTO();
+        allQuoteDTO.setCount(quoteDTOList.size());
+        allQuoteDTO.setData(quoteDTOList);
+
+        return ResponseEntity.ok(allQuoteDTO);
     }
 }

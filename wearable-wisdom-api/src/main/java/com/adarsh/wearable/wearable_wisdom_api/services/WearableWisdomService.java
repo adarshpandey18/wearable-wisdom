@@ -4,8 +4,11 @@ import com.adarsh.wearable.wearable_wisdom_api.dtos.QuoteDTO;
 import com.adarsh.wearable.wearable_wisdom_api.entities.Quote;
 import com.adarsh.wearable.wearable_wisdom_api.repositories.WearableWisdomRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.List;
 
 @Service
 public class WearableWisdomService {
@@ -49,4 +52,15 @@ public class WearableWisdomService {
         wearableWisdomRepository.save(newDaily);
     }
 
+    public List<QuoteDTO> getAllQuotes() {
+        try {
+            List<Quote> allQuotes = wearableWisdomRepository.findAll();
+            List<QuoteDTO> quoteDTOList = allQuotes.stream()
+                    .map(quote -> modelMapper.map(quote, QuoteDTO.class)).toList();
+            return quoteDTOList;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+
+        }
+    }
 }
